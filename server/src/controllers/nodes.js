@@ -26,7 +26,7 @@ const createNodes = (req, res) => {
   })
   stmt.finalize((err) => {
     if (err) return res.status(400).json({ err })
-    else return res.status(200).json({ nodes })
+    return res.status(200).json({ nodes })
   });
 }
 
