@@ -2,8 +2,8 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const login = require('../controllers/user')
 const authMiddleware = require('../middleware/auth')
-const polls = require('../controllers/polls')
-const votes = require('../controllers/votes')
+const nodes = require('../controllers/nodes')
+const edges = require('../controllers/edges')
 
 module.exports = (app) => {
   app.use(cors())
@@ -14,16 +14,16 @@ module.exports = (app) => {
 
   app.post('/login', login)
 
-  app.get('/polls', polls.readPolls)
-  app.get('/polls/:id', polls.readPolls)
-  app.post('/polls', authMiddleware, polls.createPoll)
-  app.put('/polls', authMiddleware, (req, res) => res.status(200).json('Polls endpoint'))
-  app.delete('/polls', authMiddleware, (req, res) => res.status(200).json('Polls endpoint'))
+  app.get('/nodes', authMiddleware, nodes.readNodes)
+  app.get('/nodes/:id', authMiddleware, nodes.readNodes)
+  app.post('/nodes', authMiddleware, nodes.createNodes)
+  app.put('/nodes', authMiddleware, (req, res) => res.status(200).json('Nodes endpoint'))
+  app.delete('/nodes', authMiddleware, (req, res) => res.status(200).json('Nodes endpoint'))
 
-  app.get('/votes', (req, res) => res.status(200).json('Votes endpoint'))
-  app.get('/votes/:id', votes.readVotes)
-  app.post('/votes', votes.createVotes)
-  app.put('/votes', (req, res) => res.status(200).json('Votes endpoint'))
-  app.delete('/votes', (req, res) => res.status(200).json('Votes endpoint'))
+  app.get('/edges', (req, res) => res.status(200).json('Edges endpoint'))
+  app.get('/edges/:id', edges.readEdges)
+  app.post('/edges', edges.createEdges)
+  app.put('/edges', (req, res) => res.status(200).json('Edges endpoint'))
+  app.delete('/edges', (req, res) => res.status(200).json('Edges endpoint'))
 }
 

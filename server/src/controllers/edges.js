@@ -1,6 +1,6 @@
 const db = require('../connections/sqlite')
 
-const readVotes = (req, res) => {
+const readEdges = (req, res) => {
   console.log('read votes')
   if (!req.params.id) return res.status(403).json({ error: 'Must send poll id'})
   const pollId = req.params.id;
@@ -23,7 +23,7 @@ const readVotes = (req, res) => {
   })
 }
 
-const createVotes = (req, res) => {
+const createEdges = (req, res) => {
   console.log('create votes')
   //let pollId
   console.log(req.body )
@@ -47,17 +47,17 @@ const createVotes = (req, res) => {
   })
 }
 
-const updateVotes = () => {
+const updateEdges = () => {
 	
 }
 
-const deleteVotes = () => {
+const deleteEdges = () => {
 	
 }
 
 module.exports = {
-  readVotes,
-  createVotes,
-  updateVotes,
-  deleteVotes
+  readEdges,
+  createEdges,
+  updateEdges,
+  deleteEdges
 }

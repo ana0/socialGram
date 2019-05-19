@@ -1,6 +1,6 @@
 const db = require('../connections/sqlite')
 
-const readPolls = (req, res)  => {
+const readNodes = (req, res)  => {
   if (req.params.id) {
     // TO-DO parse int on id
     return db.all(`SELECT id, answer FROM pollItems WHERE pollsId IS '${req.params.id}';`, async (err, poll) => {
@@ -17,7 +17,7 @@ const readPolls = (req, res)  => {
   })
 }
 
-const createPoll = (req, res) => {
+const createNodes = (req, res) => {
   console.log('create')
   let pollId
   const { question, answers } = req.body.poll
@@ -39,17 +39,17 @@ const createPoll = (req, res) => {
   })
 }
 
-const updatePoll = (req, res)  => {
+const updateNode = (req, res)  => {
 	res.status(200).json('Polls endpoint')
 }
 
-const deletePoll = (req, res)  => {
+const deleteNode = (req, res)  => {
 	res.status(200).json('Polls endpoint')
 }
 
 module.exports = {
-  readPolls,
-  createPoll,
-  updatePoll,
-  deletePoll
+  readNodes,
+  createNodes,
+  updateNode,
+  deleteNode
 }
