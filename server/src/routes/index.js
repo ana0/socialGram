@@ -17,8 +17,8 @@ module.exports = (app) => {
   app.get('/nodes', authMiddleware, nodes.readNodes)
   app.get('/nodes/:id', authMiddleware, nodes.readNodes)
   app.post('/nodes', authMiddleware, nodes.createNodes)
-  app.put('/nodes', authMiddleware, (req, res) => res.status(200).json('Nodes endpoint'))
-  app.delete('/nodes', authMiddleware, (req, res) => res.status(200).json('Nodes endpoint'))
+  app.put('/nodes/:id', authMiddleware, nodes.updateNode)
+  app.delete('/nodes/:id', authMiddleware, nodes.deleteNode)
 
   app.get('/edges', (req, res) => res.status(200).json('Edges endpoint'))
   app.get('/edges/:id', edges.readEdges)

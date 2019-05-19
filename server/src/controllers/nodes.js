@@ -3,48 +3,39 @@ const db = require('../connections/sqlite')
 const readNodes = (req, res)  => {
   if (req.params.id) {
     // TO-DO parse int on id
-    return db.all(`SELECT id, answer FROM pollItems WHERE pollsId IS '${req.params.id}';`, async (err, poll) => {
-      if (err) throw err;
-      if (!poll) return res.status(401).json({ error: 'Not found' });
-      return res.status(200).json({ pollId: req.params.id, answers: poll })
+    return db.all(`SELECT id, public, private FROM nodes WHERE id IS '${req.params.id}';`, (err, node) => {
+      if (err) return res.status(400).json({ err })
+      if (!node) return res.status(401).json({ error: 'Not found' });
+      return res.status(200).json({ node })
     })
   }
-  //return db.all(`SELECT question, answer, pollsId FROM polls INNER JOIN pollItems ON pollItems.pollsId = polls.id;`, async (err, polls) => {
-  return db.all(`SELECT id, question FROM polls;`, async (err, polls) => {
-    if (err) throw err;
-    if (!polls) return res.status(401).json({ error: 'No polls' });
-    return res.status(200).json({ polls })
+  return db.all(`SELECT id, public, private FROM nodes;`, (err, nodes) => {
+    if (err) return res.status(400).json({ err })
+    if (!nodes) return res.status(401).json({ error: 'No nodes' });
+    return res.status(200).json({ nodes })
   })
 }
 
 const createNodes = (req, res) => {
   console.log('create')
-  let pollId
-  const { question, answers } = req.body.poll
+  const nodes = req.body.nodes
   // must use old function notation
-  db.run("INSERT INTO polls(question) VALUES (?)", question, function(err) {
-    if (err) throw err;
-
-    console.log(`inserted question ${this.lastID}`)
-    pollId = this.lastID
-    const stmt = db.prepare("INSERT INTO pollItems(answer, pollsId) VALUES (?, ?)");
-    answers.map((a) => {
-      return stmt.run([a, pollId]);
-    })
-    stmt.finalize();
-    // db.each("SELECT rowid AS id, answer, pollsId FROM pollItems", function(err, row) {
-    //     console.log(row.id + ": " + row.answer + ' ' + row.pollsId);
-    // });
-    res.status(200).json(`Create poll ${pollId}`)
+  const stmt = db.prepare("INSERT INTO nodes(public, private) VALUES (?, ?)");
+  nodes.map((a) => {
+    return stmt.run([a.oublic, a.private]);
   })
+  stmt.finalize((err) => {
+    if (err) return res.status(400).json({ err })
+    else return res.status(200).json({ nodes })
+  });
 }
 
 const updateNode = (req, res)  => {
-	res.status(200).json('Polls endpoint')
+	res.status(200).json('Unimplemented nodes endpoint')
 }
 
 const deleteNode = (req, res)  => {
-	res.status(200).json('Polls endpoint')
+	res.status(200).json('Unimplemented nodes endpoint')
 }
 
 module.exports = {
