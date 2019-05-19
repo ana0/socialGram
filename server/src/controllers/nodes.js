@@ -22,7 +22,7 @@ const createNodes = (req, res) => {
   // must use old function notation
   const stmt = db.prepare("INSERT INTO nodes(public, private) VALUES (?, ?)");
   nodes.map((a) => {
-    return stmt.run([a.oublic, a.private]);
+    return stmt.run([a.public, a.private]);
   })
   stmt.finalize((err) => {
     if (err) return res.status(400).json({ err })
