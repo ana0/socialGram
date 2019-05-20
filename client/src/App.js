@@ -8,7 +8,6 @@ class Graph extends Component {
   render() {
     return (
       <div>
-    	  <h1>TEST</h1>
         <GraphDisplay />
       </div>
     )

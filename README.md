@@ -10,7 +10,8 @@ Durational game for building visualizing the social graph of an event
 - [x] error handling for typos
 - [ ] no duplicates in discovered keys/edges
 - [x] query fetchs full graph
-- [ ] circle packing for full graph
+- [x] draw full graph
+- [ ] highly connected nodes are closer
 - [ ] analysis of graph
   - [ ] most connected nodes
   - [ ] strongly connected chunks

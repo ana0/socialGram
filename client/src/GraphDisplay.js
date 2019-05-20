@@ -15,7 +15,6 @@ let links = [
   { source: nodes[2], target: nodes[0] }
 ];
 
-
 class GraphDisplay extends Component {
   constructor(props) {
     super(props);
