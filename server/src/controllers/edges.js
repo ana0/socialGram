@@ -2,9 +2,10 @@ const db = require('../connections/sqlite')
 
 const readEdges = (req, res) => {
   console.log('read edges')
-  db.all(`SELECT edges.id, fromId, toId, n1.public AS fromPublic, n2.public AS toPublic FROM edges
-    JOIN nodes n1 ON n1.id = edges.fromId
-    JOIN nodes n2 ON n2.id = edges.toId;`, function(err, edges) {
+  //db.all(`SELECT edges.id, fromId, toId, n1.public AS fromPublic, n2.public AS toPublic FROM edges
+    // JOIN nodes n1 ON n1.id = edges.fromId
+    // JOIN nodes n2 ON n2.id = edges.toId;`, function(err, edges) {
+  db.all(`SELECT id, fromId, toId FROM edges`, function(err, edges) {
     if (err) throw err;
     console.log(edges)
     return res.status(200).json({ edges })

@@ -14,12 +14,13 @@ module.exports = (app) => {
 
   app.post('/login', login)
 
-  app.get('/admin/nodes', authMiddleware, nodes.readNodes)
+  app.get('/admin/nodes', authMiddleware, (req, res) => nodes.readNodes(req, res, true))
   app.get('/admin/nodes/:id', authMiddleware, nodes.readNodes)
   app.post('/admin/nodes', authMiddleware, nodes.createNodes)
   app.put('/admin/nodes/:id', authMiddleware, nodes.updateNode)
   app.delete('/admin/nodes/:id', authMiddleware, nodes.deleteNode)
 
+  app.get('/nodes', (req, res) => nodes.readNodes(req, res, false))
   app.get('/nodes/:key', nodes.search)
 
   app.get('/edges/', edges.readEdges)

@@ -7,8 +7,10 @@ import GraphDisplay from './GraphDisplay';
 class Graph extends Component {
   render() {
     return (
-	  <h1>TEST</h1>
-    <GraphDisplay />
+      <div>
+    	  <h1>TEST</h1>
+        <GraphDisplay />
+      </div>
     )
   }
 }

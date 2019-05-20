@@ -17,16 +17,28 @@ const search = (req, res)  => {
   })
 }
 
-const readNodes = (req, res)  => {
-  if (req.params.id) {
+const readNodes = (req, res, admin)  => {
+  if (req.params.id && admin) {
     // TO-DO parse int on id
     return db.all(`SELECT id, public, private FROM nodes WHERE id IS '${req.params.id}';`, (err, node) => {
       if (err) return res.status(400).json({ err })
       if (!node) return res.status(401).json({ error: 'Not found' });
       return res.status(200).json({ node })
     })
+  } else if (req.params.id) {
+    return db.all(`SELECT id, public FROM nodes WHERE id IS '${req.params.id}';`, (err, node) => {
+      if (err) return res.status(400).json({ err })
+      if (!node) return res.status(401).json({ error: 'Not found' });
+      return res.status(200).json({ node })
+    })
+  } else if (admin) {
+    return db.all(`SELECT id, public, private FROM nodes;`, (err, nodes) => {
+      if (err) return res.status(400).json({ err })
+      if (!nodes) return res.status(401).json({ error: 'No nodes' });
+      return res.status(200).json({ nodes })
+    })
   }
-  return db.all(`SELECT id, public, private FROM nodes;`, (err, nodes) => {
+  return db.all(`SELECT id, public FROM nodes;`, (err, nodes) => {
     if (err) return res.status(400).json({ err })
     if (!nodes) return res.status(401).json({ error: 'No nodes' });
     return res.status(200).json({ nodes })
