@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
-import { Graph } from '@vx/network';
-//import { genRandomNormalPoints } from '@vx/mock-data';
+import P5Wrapper from './P5Wrapper'
 import './index.css'
 import { apiUrl } from './env'
-
-//const points = genRandomNormalPoints();
 
 let nodes = [
   { x: 50, y: 20 },
@@ -18,10 +15,6 @@ let links = [
   { source: nodes[2], target: nodes[0] }
 ];
 
-const graph = {
-  nodes,
-  links
-};
 
 class GraphDisplay extends Component {
   constructor(props) {
@@ -53,17 +46,27 @@ class GraphDisplay extends Component {
       })
       .then(response => response.json())
       .then(data => {
-        nodes = data.nodes
+        nodes = data.nodes.map((n, index) => {
+          n.x = Math.random() * window.innerWidth;
+          n.y = Math.random() * window.innerHeight;
+          return n;
+        })
+        links = links.map(e => {
+          e.source = nodes.find(n => n.id === e.fromId)
+          e.target = nodes.find(n => n.id === e.toId)
+          return e;
+        })
+        this.setState({ nodes, links })
       })
 
   }
 
   render() {
     return (
-      <svg width={window.innerWidth} height={window.innerHeight}>
-        <rect width={window.innerWidth} height={window.innerHeight} rx={14} fill="#272b4d" />
-        <Graph graph={graph} />
-      </svg>
+      <P5Wrapper
+        p5Props={{ nodes: this.state.nodes, links: this.state.links }}
+        onSetAppState={this.onSetAppState}
+      />
     );
   }
 }
