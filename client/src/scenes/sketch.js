@@ -1,33 +1,70 @@
 
+
+
 export default function (p) {
   let edges = [];
-  //let nodes = [];
+  let dragging = false;
+  let nodes = [];
+  let draggedNode = {};
 
-  p.setup = function() {
+  p.mousePressed = () => {
+    nodes.map((n, index) => {
+      if (p.mouseX > (n.x - 10) && p.mouseX < (n.x + 10) && p.mouseY > (n.y - 10) && p.mouseY < (n.y + 20)) {
+        dragging = true;
+        draggedNode = index;
+      }
+      return n
+    })
+  }
+
+  p.mouseDragged = () => {
+    nodes[draggedNode].x = p.mouseX
+    nodes[draggedNode].y = p.mouseY
+  }
+
+  p.mouseReleased = () => {
+    dragging = false;
+  }
+
+  p.setup = () => {
     console.log(p.props)
     p.createCanvas(window.innerWidth, window.innerHeight);
     p.background(200)
   }
 
-  p.draw = function() {
+  p.draw = () => {
   	if (p.props.links.length !== edges.length) {
   	  console.log(p.props.links)
-      edges = p.props.links
-      p.props.nodes.map((n) => {
+      nodes = p.props.nodes.map((n) => {
         p.fill(255)
         p.stroke(255)
         p.circle(n.x, n.y, 20)
         p.fill(0)
         p.text(n.public, n.x, n.y);
-        return true
+        return n
       })
-      edges.map(e => {
+      edges = p.props.links.map(e => {
         p.stroke(0)
         p.line(e.source.x, e.source.y, e.target.x, e.target.y)
-        return true
+        return e
       })
-
-
   	}
+
+    if (dragging) {
+      p.background(200)
+      nodes = p.props.nodes.map((n) => {
+        p.fill(255)
+        p.stroke(255)
+        p.circle(n.x, n.y, 20)
+        p.fill(0)
+        p.text(n.public, n.x, n.y);
+        return n
+      })
+      edges = p.props.links.map(e => {
+        p.stroke(0)
+        p.line(e.source.x, e.source.y, e.target.x, e.target.y)
+        return e
+      })
+    }
   }
 }
