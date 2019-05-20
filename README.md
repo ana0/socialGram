@@ -7,7 +7,8 @@ Durational game for building visualizing the social graph of an event
 - [x] admin create idents
 - [x] user submits themself
 - [x] user submits found names
-- [ ] error handling for typos
+- [x] error handling for typos
+- [ ] no duplicates in discovered keys/edges
 - [x] query fetchs full graph
 - [ ] circle packing for full graph
 - [ ] analysis of graph

@@ -21,7 +21,7 @@ const createEdges = (req, res) => {
     db.all(`SELECT id, public FROM nodes WHERE public IN (${JSON.stringify(edges).slice(1, JSON.stringify(edges).length-1)})`, function(err, nodes) {
       if (err) return res.status(400).json({ err })
       edges = edges.map(e => { return { fromId: auth.id, toId: (nodes.find(n => n.public === e)).id } })
-      const stmt = db.prepare("INSERT INTO edges(fromId, toId) VALUES (?, ?)");
+      const stmt = db.prepare("INSERT INTO edges(toId, fromId) VALUES (?, ?)");
       edges.map((a) => {
         return stmt.run([a.toId, a.fromId]);
       })

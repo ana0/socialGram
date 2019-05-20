@@ -1,5 +1,22 @@
 const db = require('../connections/sqlite')
 
+const search = (req, res)  => {
+  console.log('search')
+  if (!req.params.key) return res.status(400).json({ error: 'Key is required' })
+  if (req.query.private) {
+    return db.get(`SELECT id, public FROM nodes WHERE private IS '${req.params.key}';`, (err, node) => {
+      if (err) return res.status(400).json({ err })
+      if (!node) return res.status(401).json({ error: 'Not found' });
+      return res.status(200).json({ node })
+    })
+  }
+  return db.get(`SELECT id, public FROM nodes WHERE public IS '${req.params.key}';`, (err, node) => {
+    if (err) return res.status(400).json({ err })
+    if (!node) return res.status(401).json({ error: 'Not found' });
+    return res.status(200).json({ node })
+  })
+}
+
 const readNodes = (req, res)  => {
   if (req.params.id) {
     // TO-DO parse int on id
@@ -39,6 +56,7 @@ const deleteNode = (req, res)  => {
 }
 
 module.exports = {
+  search,
   readNodes,
   createNodes,
   updateNode,
