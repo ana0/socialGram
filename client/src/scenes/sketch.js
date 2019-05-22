@@ -53,6 +53,7 @@ export default function (p) {
   }
 
   p.mouseDragged = () => {
+    if (!nodes[draggedNode]) return;
     nodes[draggedNode].x = p.mouseX
     nodes[draggedNode].y = p.mouseY
   }
@@ -73,8 +74,8 @@ export default function (p) {
       nodes = countConnections(p.props.nodes, p.props.links)
       nodes = maxConnections(nodes)
       nodes = nodes.map((n) => {
+        p.noStroke();
         setFill(n.max)
-        p.stroke(255)
         p.circle(n.x, n.y, 20)
         p.fill(0)
         p.text(`${n.public} ${n.count}`, n.x, n.y);
@@ -92,8 +93,8 @@ export default function (p) {
       nodes = countConnections(p.props.nodes, p.props.links)
       nodes = maxConnections(nodes)
       nodes = nodes.map((n) => {
+        p.noStroke();
         setFill(n.max)
-        p.stroke(255)
         p.circle(n.x, n.y, 20)
         p.fill(0)
         p.text(`${n.public} ${n.count}`, n.x, n.y);

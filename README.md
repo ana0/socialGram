@@ -14,7 +14,7 @@ Durational game for building visualizing the social graph of an event
 - [x] draggable nodes
 - [ ] highly connected nodes are closer
 - [ ] analysis of graph
-  - [ ] most connected nodes
+  - [x] most connected nodes
   - [ ] strongly connected chunks
   - [ ] average distance
   - [ ] bridge nodes

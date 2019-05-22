@@ -22,7 +22,12 @@ export default class P5Wrapper extends Component {
     return (
       <div
         id="canvas-container"
-        style={{ width: "100%", textAlign: "center" }}
+        style={{
+          position: "fixed",
+          left: "0px",
+          width: "100%",
+          textAlign: "center",
+          marginTop: "-8px" }}
       />
     )
   }

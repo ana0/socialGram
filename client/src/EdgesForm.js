@@ -33,7 +33,7 @@ class EdgesForm extends Component {
     super(props);
     this.state = {
       hasError: false,
-      instructions: "Enter the names of all the animals you discovered",
+      instructions: "Enter the names of all the animals you discovered one by one:",
       error: '',
       private: '',
       public: '',
