@@ -10,24 +10,37 @@ const countConnections= (nodes, edges) => {
   })
 }
 
-const maxConnections= (nodes) => {
-  let max = nodes.reduce((max, n) => {
-    if (n.count > max) return n.count;
-    return max;
-  }, 0)
-  return nodes.map(n => {
-    if (n.count === max) { n.max = true }
-    else { n.max = false }
-    return n;
+const maxConnections = (nodes) => {
+  let max;
+  const list = [3, 2, 1]
+  list.map(l => {
+    max = nodes.reduce((m, n) => {
+      if (n.count >= max) return m;
+      if (n.count > m) return n.count;
+      return m;
+    }, 0)
+    nodes = nodes.map(n => {
+      if (n.count === max) { n.max = l }
+      else if (n.count < max) { n.max = 0 }
+      return n;
+    })
+    return l
   })
+  return nodes
 }
-
 
 export default function (p) {
   let edges = [];
   let dragging = false;
   let nodes = [];
   let draggedNode = {};
+
+  const setFill = (max) => {
+    if (max === 3) { p.fill(0, 0, 255) }
+    else if (max === 2) { p.fill(255, 0, 0) }
+    else if (max === 1) { p.fill(0, 255, 0) }
+    else { p.fill(255) }
+  }
 
   p.mousePressed = () => {
     nodes.map((n, index) => {
@@ -60,8 +73,7 @@ export default function (p) {
       nodes = countConnections(p.props.nodes, p.props.links)
       nodes = maxConnections(nodes)
       nodes = nodes.map((n) => {
-        if (n.max) { p.fill(40, 255, 40) }
-        else { p.fill(255) }
+        setFill(n.max)
         p.stroke(255)
         p.circle(n.x, n.y, 20)
         p.fill(0)
@@ -80,8 +92,7 @@ export default function (p) {
       nodes = countConnections(p.props.nodes, p.props.links)
       nodes = maxConnections(nodes)
       nodes = nodes.map((n) => {
-        if (n.max) { p.fill(40, 255, 40) }
-        else { p.fill(255) }
+        setFill(n.max)
         p.stroke(255)
         p.circle(n.x, n.y, 20)
         p.fill(0)
