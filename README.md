@@ -8,9 +8,10 @@ Durational game for building visualizing the social graph of an event
 - [x] user submits themself
 - [x] user submits found names
 - [x] error handling for typos
-- [ ] no duplicates in discovered keys/edges
+- [x] no duplicates in discovered keys/edges
 - [x] query fetchs full graph
 - [x] draw full graph
+- [x] draggable nodes
 - [ ] highly connected nodes are closer
 - [ ] analysis of graph
   - [ ] most connected nodes

@@ -14,6 +14,7 @@ db.serialize(async () => {
   db.run("CREATE TABLE IF NOT EXISTS edges " +
   	"(id INTEGER PRIMARY KEY ASC, fromId INT, toId INT," +
   	"FOREIGN KEY(fromId) REFERENCES nodes(id), FOREIGN KEY(toId) REFERENCES nodes(id))");
+  db.run("CREATE UNIQUE INDEX unique_edge ON edges(toId, fromId);");
 });
 
 module.exports = db
