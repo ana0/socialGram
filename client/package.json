@@ -1,11 +1,8 @@
 {
-  "name": "quadratic-voting",
+  "name": "socialGram",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@vx/drag": "0.0.189",
-    "@vx/mock-data": "0.0.189",
-    "@vx/network": "0.0.189",
     "p5": "^0.8.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
