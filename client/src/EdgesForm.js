@@ -18,11 +18,15 @@ class FormRow extends Component {
   render() {
     return (
       <div>
-        <input type="text" value={this.state.value} onChange={this.handleChange.bind(this)}/>
-        <input type="button" value="+" onClick={() => {
-          this.props.handleClick(this.state.publicKey)
-          this.setState({ value: '' })
-        }}/>
+        <input type="text"
+          value={this.state.value}
+          onChange={this.handleChange.bind(this)} />
+        <input type="button"
+          value={this.props.value}
+          onClick={() => {
+            this.props.handleClick(this.state.publicKey)
+            this.setState({ value: '' })
+          }} />
       </div>
     )
   }
@@ -37,7 +41,8 @@ class EdgesForm extends Component {
       error: '',
       private: '',
       public: '',
-      discoveredKeys: []
+      discoveredKeys: [],
+      disabled: false,
     };
   }
 
@@ -84,7 +89,8 @@ class EdgesForm extends Component {
       this.setState({
         hasError: false,
         private: privateKey,
-        public: data.node.public
+        public: data.node.public,
+        disabled: true
       })
     });
   }
@@ -116,17 +122,27 @@ class EdgesForm extends Component {
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
         {this.state.hasError ? <p style={{color:'red'}}>{this.state.error}</p> : null}
+        {this.state.public ? <p>You are: {this.state.public}</p> : null}
+        {this.state.discoveredKeys.length ? <p>You have discovered: {JSON.stringify(this.state.discoveredKeys)}</p> : null}
         <br />
-        {this.state.public ? `You are: ${JSON.stringify(this.state.public)}` : null}
-        <br />
-        {this.state.discoveredKeys.length ? `You have discovered: ${JSON.stringify(this.state.discoveredKeys)}` : null}
-        <br />
-        <p style={{color:'black'}}>Enter your secret food here:</p>
-        <FormRow handleClick={this.handleAuth.bind(this)}/>
-        <p style={{color:'black'}}>{this.state.instructions}</p>
-        <FormRow handleClick={this.handleClick.bind(this)}/>
-        <br />
-        <input type="submit" value="Submit" />
+        {!this.state.disabled ?
+          <div>
+          <p style={{color:'black'}}>Enter your secret food here:</p>
+          <FormRow
+            handleClick={this.handleAuth.bind(this)}
+            value='login'/>
+          </div> :
+          null}
+        {this.state.disabled ?
+          <div>
+            <p style={{color:'black'}}>{this.state.instructions}</p>
+            <FormRow
+              handleClick={this.handleClick.bind(this)}
+              value='+'/>
+            <br />
+            <input type="submit" value="Submit animals" />
+          </div> :
+          null}
       </form>
     )
   }
