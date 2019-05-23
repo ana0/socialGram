@@ -1,4 +1,4 @@
-# socialGraph
+# socialGram
 
 Durational game for building visualizing the social graph of an event
 
@@ -7,6 +7,7 @@ Durational game for building visualizing the social graph of an event
 - [x] admin create idents
 - [x] user submits themself
 - [x] user submits found names
+- [ ] form ux could be a lot better
 - [x] error handling for typos
 - [x] no duplicates in discovered keys/edges
 - [x] query fetchs full graph
