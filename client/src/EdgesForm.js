@@ -13,6 +13,7 @@ class FormRow extends Component {
 
   handleChange(event) {
     this.setState({ publicKey: event.target.value, value: event.target.value })
+    this.props.handleChange(event.target.value);
   }
 
   render() {
@@ -20,8 +21,10 @@ class FormRow extends Component {
       <div>
         <input type="text"
           value={this.state.value}
+          onKeyPress={(e)=>{e.target.keyCode === 13 && e.preventDefault()} }
           onChange={this.handleChange.bind(this)} />
         <input type="button"
+          onKeyPress={(e)=>{e.target.keyCode === 13 && e.preventDefault()} }
           value={this.props.value}
           onClick={() => {
             this.props.handleClick(this.state.publicKey)
@@ -43,33 +46,44 @@ class EdgesForm extends Component {
       public: '',
       discoveredKeys: [],
       disabled: false,
+      currentlySelectedAnimal: ''
     };
   }
 
   handleSubmit(event) {
     event.preventDefault();
     console.log('submit')
-    if (this.state.hasError) { alert('Cannot submit with errors!') }
-    else { 
-      const data = { edges: this.state.discoveredKeys, private: this.state.private }
-      return fetch(`${apiUrl}edges`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data),
-      })
-      .then(response => {
-        console.log(response)
-        this.setState({
-          error: '',
-          private: '',
-          public: '',
-          discoveredKeys: []
+    if (!this.state.public) { alert('Please enter your password!'); return }
+    this.handleClick(this.state.currentlySelectedAnimal)
+    .then(() => {
+      if (this.state.discoveredKeys.length === 0) { alert('No animals to submit!'); return; }
+      if (this.state.hasError) { alert('Cannot submit with errors!') }
+      else { 
+        const data = { edges: this.state.discoveredKeys, private: this.state.private }
+        return fetch(`${apiUrl}edges`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data),
         })
-        return alert('Success! Your discovered animals were submitted')
-      })
-    }
+        .then(response => {
+          console.log(response)
+          this.setState({
+            error: '',
+            private: '',
+            public: '',
+            discoveredKeys: [],
+            disabled: false
+          })
+          return alert('Success! Your discovered animals were submitted')
+        })
+      }
+    })
+  }
+
+  handleChange(value) {
+    this.setState({ currentlySelectedAnimal: value })
   }
 
   handleAuth(privateKey) {
@@ -84,7 +98,7 @@ class EdgesForm extends Component {
     .then(data => {
       if (data.error) return this.setState({
         hasError: true,
-        error: `Secret food ${privateKey} not found, did you spell it correctly?`
+        error: `Password ${privateKey} not found, did you spell it correctly?`
       })
       this.setState({
         hasError: false,
@@ -120,7 +134,9 @@ class EdgesForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit.bind(this)}>
+      <form 
+        onSubmit={this.handleSubmit.bind(this)}
+        onKeyPress={(e)=>{e.target.keyCode === 13 && e.preventDefault()} }>
         {this.state.hasError ? <p style={{color:'red'}}>{this.state.error}</p> : null}
         {this.state.public ? <p>You are: {this.state.public}</p> : null}
         {this.state.discoveredKeys.length ? <p>You have discovered: {JSON.stringify(this.state.discoveredKeys)}</p> : null}
@@ -129,6 +145,7 @@ class EdgesForm extends Component {
           <div>
           <p style={{color:'black'}}>Enter your secret food here:</p>
           <FormRow
+            handleChange={this.handleChange.bind(this)}
             handleClick={this.handleAuth.bind(this)}
             value='login'/>
           </div> :
@@ -137,10 +154,14 @@ class EdgesForm extends Component {
           <div>
             <p style={{color:'black'}}>{this.state.instructions}</p>
             <FormRow
+              handleChange={this.handleChange.bind(this)}
               handleClick={this.handleClick.bind(this)}
               value='+'/>
             <br />
-            <input type="submit" value="Submit animals" />
+            <input
+              type="button"
+              value="Submit animals"
+              onKeyPress={(e)=>{e.target.keyCode === 13 && e.preventDefault()} }/>
           </div> :
           null}
       </form>

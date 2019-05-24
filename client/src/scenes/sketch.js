@@ -35,11 +35,23 @@ export default function (p) {
   let nodes = [];
   let draggedNode = {};
 
-  const setFill = (max) => {
-    if (max === 3) { p.fill(0, 0, 255) }
-    else if (max === 2) { p.fill(255, 0, 0) }
-    else if (max === 1) { p.fill(0, 255, 0) }
-    else { p.fill(255) }
+  const setFill = (max) => { 
+    if (max === 3) { return{ r: 249, g: 42, b: 97 } }
+    else if (max === 2) { return { r: 255, g: 187, b: 0 } }
+    else if (max === 1) { return { r: 42, g: 249, b: 108 } }
+    else { return { r: 255, g: 0, b: 255 } }
+  }
+
+  const drawConcentric = (x, y, colour) => {
+    p.fill(colour.r, colour.g, colour.b, 255)
+    p.circle(x, y, 20)
+    p.fill(colour.r, colour.g, colour.b, 105)
+    p.circle(x, y, 30)
+    p.fill(colour.r, colour.g, colour.b, 50)
+    p.circle(x, y, 40)
+    p.fill(colour.r, colour.g, colour.b, 20)
+    p.circle(x, y, 60)
+    p.fill(colour.r, colour.g, colour.b, 255)
   }
 
   p.mousePressed = () => {
@@ -59,13 +71,14 @@ export default function (p) {
   }
 
   p.mouseReleased = () => {
+    draggedNode = {}
     dragging = false;
   }
 
   p.setup = () => {
     console.log(p.props)
     p.createCanvas(window.innerWidth, window.innerHeight);
-    p.background(200)
+    p.background(255)
   }
 
   p.draw = () => {
@@ -73,37 +86,37 @@ export default function (p) {
   	  console.log(p.props.links)
       nodes = countConnections(p.props.nodes, p.props.links)
       nodes = maxConnections(nodes)
-      nodes = nodes.map((n) => {
-        p.noStroke();
-        setFill(n.max)
-        p.circle(n.x, n.y, 20)
-        p.fill(0)
-        p.text(`${n.public} ${n.count}`, n.x, n.y);
-        return n
-      })
       edges = p.props.links.map(e => {
         p.stroke(0)
         p.line(e.source.x, e.source.y, e.target.x, e.target.y)
         return e
+      })
+      nodes = nodes.map((n) => {
+        p.noStroke();
+        const colour = setFill(n.max)
+        drawConcentric(n.x, n.y, colour)
+        p.fill(0)
+        p.text(`${n.public} ${n.count}`, n.x, n.y);
+        return n
       })
   	}
 
     if (dragging) {
-      p.background(200)
+      p.background(255)
       nodes = countConnections(p.props.nodes, p.props.links)
       nodes = maxConnections(nodes)
-      nodes = nodes.map((n) => {
-        p.noStroke();
-        setFill(n.max)
-        p.circle(n.x, n.y, 20)
-        p.fill(0)
-        p.text(`${n.public} ${n.count}`, n.x, n.y);
-        return n
-      })
       edges = p.props.links.map(e => {
         p.stroke(0)
         p.line(e.source.x, e.source.y, e.target.x, e.target.y)
         return e
+      })
+      nodes = nodes.map((n) => {
+        p.noStroke();
+        const colour = setFill(n.max)
+        drawConcentric(n.x, n.y, colour)
+        p.fill(0)
+        p.text(`${n.public} ${n.count}`, n.x, n.y);
+        return n
       })
     }
   }
