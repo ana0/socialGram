@@ -94,6 +94,7 @@ export default function (p) {
       nodes = nodes.map((n) => {
         p.noStroke();
         const colour = setFill(n.max)
+        if (n.count === 0) return n
         drawConcentric(n.x, n.y, colour)
         p.fill(0)
         p.text(`${n.public} ${n.count}`, n.x, n.y);
@@ -113,6 +114,7 @@ export default function (p) {
       nodes = nodes.map((n) => {
         p.noStroke();
         const colour = setFill(n.max)
+        if (n.count === 0) return n
         drawConcentric(n.x, n.y, colour)
         p.fill(0)
         p.text(`${n.public} ${n.count}`, n.x, n.y);

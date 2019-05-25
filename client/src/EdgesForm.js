@@ -12,8 +12,9 @@ class FormRow extends Component {
   }
 
   handleChange(event) {
-    this.setState({ publicKey: event.target.value, value: event.target.value })
-    this.props.handleChange(event.target.value);
+    const key = (event.target.value.trim()).toLowerCase()
+    this.setState({ publicKey: key, value: key })
+    this.props.handleChange(key);
   }
 
   render() {
@@ -21,10 +22,10 @@ class FormRow extends Component {
       <div>
         <input type="text"
           value={this.state.value}
-          onKeyPress={(e)=>{e.target.keyCode === 13 && e.preventDefault()} }
+          //onKeyPress={(e)=>{e.target.keyCode === 13 && e.preventDefault()} }
           onChange={this.handleChange.bind(this)} />
         <input type="button"
-          onKeyPress={(e)=>{e.target.keyCode === 13 && e.preventDefault()} }
+          //onKeyPress={(e)=>{e.target.keyCode === 13 && e.preventDefault()} }
           value={this.props.value}
           onClick={() => {
             this.props.handleClick(this.state.publicKey)
@@ -159,9 +160,10 @@ class EdgesForm extends Component {
               value='+'/>
             <br />
             <input
-              type="button"
+              type="submit"
               value="Submit animals"
-              onKeyPress={(e)=>{e.target.keyCode === 13 && e.preventDefault()} }/>
+              //onKeyPress={(e)=>{} }
+              />
           </div> :
           null}
       </form>
