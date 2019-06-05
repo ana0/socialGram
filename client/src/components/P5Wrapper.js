@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import p5 from 'p5'
-import sketch from './scenes/sketch'
+import sketch from './../scenes/sketch'
 
 export default class P5Wrapper extends Component {
   componentDidMount() {

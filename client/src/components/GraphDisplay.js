@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import P5Wrapper from './P5Wrapper'
-import './index.css'
-import { apiUrl } from './env'
+import './../index.css'
+import { apiUrl } from './../env'
 
 let nodes = [
   { x: 50, y: 20 },

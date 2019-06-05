@@ -1,0 +1,267 @@
+        {
+            "public": "giraffe",
+            "private": "pizza"
+        },
+        {
+            "public": "panda",
+            "private": "pie"
+        },
+        {
+            "public": "lemur",
+            "private": "tomatoes"
+        },
+        {
+            "public": "turtle",
+            "private": "falafels"
+        },
+        {
+            "public": "python",
+            "private": "jam"
+        },
+        {
+            "public": "mouse",
+            "private": "cookies"
+        },
+        {
+            "public": "horse",
+            "private": "dumplings"
+        },        {
+            "public": "whale",
+            "private": "spaghetti"
+        },
+        {
+            "public": "fox",
+            "private": "cereal"
+        },
+        {
+            "public": "tartula",
+            "private": "milkshakes"
+        },
+        {
+            "public": "pug",
+            "private": "banana"
+        },
+        {
+            "public": "frog",
+            "private": "tacos"
+        },
+        {
+            "public": "butterfly",
+            "private": "raisins"
+        },
+        {
+            "public": "grasshopper",
+            "private": "pears"
+        },
+        {
+            "public": "gorilla",
+            "private": "beans"
+        },
+        {
+            "public": "stringray",
+            "private": "fries"
+        },
+        {
+            "public": "starfish",
+            "private": "juice"
+        },
+        {
+            "public": "shark",
+            "private": "granola"
+        },
+        {
+            "public": "octopus",
+            "private": "steak"
+        },
+        {
+            "public": "squid",
+            "private": "chocolate"
+        },
+        {
+            "public": "toad",
+            "private": "peanuts"
+        },
+        {
+            "public": "shrimp",
+            "private": "almonds"
+        },
+        {
+            "public": "oyster",
+            "private": "poutine"
+        },
+        {
+            "public": "moth",
+            "private": "quesadilla"
+        },
+        {
+            "public": "dolphin",
+            "private": "hazelnut"
+        },
+        {
+            "public": "gecko",
+            "private": "apple"
+        },
+        {
+            "public": "salamander",
+            "private": "spinach"
+        },
+        {
+            "public": "anaconda",
+            "private": "arugula"
+        },
+        {
+            "public": "viper",
+            "private": "cheddarcheese"
+        },
+        {
+            "public": "snake",
+            "private": "gouda"
+        },
+        {
+            "public": "centipede",
+            "private": "bubblegum"
+        },
+        {
+            "public": "penguin",
+            "private": "brie"
+        },
+        {
+            "public": "bear",
+            "private": "strawberries"
+        },
+        {
+            "public": "racoon",
+            "private": "lemons"
+        },
+        {
+            "public": "seagull",
+            "private": "potatoes"
+        },
+        {
+            "public": "pigeon",
+            "private": "plums"
+        },
+        {
+            "public": "parrot",
+            "private": "artichoke"
+        },
+        {
+            "public": "albatross",
+            "private": "butter"
+        },
+        {
+            "public": "sparrow",
+            "private": "yogurt"
+        },
+        {
+            "public": "woodpecker",
+            "private": "fish"
+        },
+        {
+            "public": "robin",
+            "private": "candy"
+        },
+        {
+            "public": "owl",
+            "private": "springroll"
+        },
+        {
+            "public": "bluejay",
+            "private": "sausage"
+        },
+        {
+            "public": "fox",
+            "private": "cereal"
+        },
+        {
+            "public": "crow",
+            "private": "hamburger"
+        },
+        {
+            "public": "eagle",
+            "private": "croissant"
+        },
+        {
+            "public": "deer",
+            "private": "omelette"
+        },
+        {
+            "public": "moose",
+            "private": "grapes"
+        },
+        {
+            "public": "cow",
+            "private": "mushrooms"
+        },
+        {
+            "public": "chicken",
+            "private": "oliveoil"
+        },
+        {
+            "public": "hedgehog",
+            "private": "pepper"
+        },
+        {
+            "public": "zebra",
+            "private": "curry"
+        },
+        {
+            "public": "lion",
+            "private": "tea"
+        },
+        {
+            "public": "tiger",
+            "private": "cinnamon"
+        },
+        {
+            "public": "cougar",
+            "private": "basil"
+        },
+        {
+            "public": "buffalo",
+            "private": "salt"
+        },
+        {
+            "public": "elephant",
+            "private": "crackers"
+        },
+        {
+            "public": "rhino",
+            "private": "celery"
+        },
+        {
+            "public": "koala",
+            "private": "pumpkin"
+        },
+        {
+            "public": "seal",
+            "private": "canteloupe"
+        },
+        {
+            "public": "walrus",
+            "private": "watermelon"
+        },
+        {
+            "public": "porcupine",
+            "private": "honeydew"
+        },
+        {
+            "public": "kangaroo",
+            "private": "cabbage"
+        },
+        {
+            "public": "squirrel",
+            "private": "toast"
+        },
+        {
+            "public": "bat",
+            "private": "sushi"
+        },
+        {
+            "public": "donkey",
+            "private": "lettuce"
+        },
+        {
+            "public": "hyena",
+            "private": "soup"
+        }
